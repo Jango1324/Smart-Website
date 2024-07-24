@@ -1,0 +1,2 @@
+This is a website project that allows user to get resources about their liking. Whether you are a student, adult or just a regular follk who wants to learn something but is too lazy (like me fr) to find resources, you can just type your query and the website will give you (videos, books and research papers)
+In the About and Summary sections, it utilizes hugging face AI models to generate summary and detailed paragraph. However, the raw models are untrained and require training for the best result.
