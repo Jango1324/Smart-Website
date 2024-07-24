@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <title>Study Resource Results</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Press Start 2P', cursive; /* Minecraft-like font */
+            color: #F5F5DC; /* Cream-like white text color */
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://gadgetgang.com/wp-content/uploads/2020/10/minecraft-enchantment-table-gif.gif') no-repeat center center;
+            background-size: cover;
+            z-index: -1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            overflow: auto; /* Allow scrolling */
+            max-height: 100vh; /* Ensure the container doesn't exceed viewport height */
+        }
+
+        .card {
+            background: #8B4513; /* Brown background similar to Minecraft enchantments */
+            border: 3px solid #808080; /* Greyish border */
+            border-radius: 10px;
+            font-family: 'Press Start 2P', cursive; /* Minecraft-like font */
+        }
+
+        .card-header {
+            cursor: pointer;
+            background-color: #6F4F28; /* Darker brown header background */
+            color: #F5F5DC; /* Cream-like white text color */
+        }
+
+        .card-body {
+            color: #F5F5DC; /* Cream-like white text color */
+        }
+
+        .card-title a {
+            color: #F5F5DC; /* Cream-like white text color for links */
+            text-decoration: none;
+        }
+
+        .card-title a:hover {
+            color: #D2B48C; /* Slightly darker brown on hover */
+        }
+
+        .minecraft-title {
+            background: linear-gradient(90deg, #8B4513, #A0522D, #8B4513);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: #F5F5DC; /* Cream-like white text color */
+            font-size: 3rem;
+            font-weight: bold;
+            animation: titleAnimation 5s ease infinite;
+        }
+
+        @keyframes titleAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <div class="container">
+        <h1 class="minecraft-title">Results for "{{ query }}"</h1>
+        
+        <div class="card mt-3">
+            <div class="card-header" data-toggle="collapse" data-target="#summary">
+                <h2>Summary</h2>
+            </div>
+            <div id="summary" class="collapse show">
+                <div class="card-body">
+                    <p>{{ summary }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-header" data-toggle="collapse" data-target="#about">
+                <h2>About</h2>
+            </div>
+            <div id="about" class="collapse">
+                <div class="card-body">
+                    <p>{{ paragraph }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-header" data-toggle="collapse" data-target="#youtube-videos">
+                <h2>YouTube Videos</h2>
+            </div>
+            <div id="youtube-videos" class="collapse">
+                <div class="card-body">
+                    {% for video in youtube %}
+                        <div class="mb-4">
+                            <a href="{{ video.url }}" target="_blank">{{ video.title }}</a>
+                            <br>
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ video.url.split('=')[1] }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-header" data-toggle="collapse" data-target="#books">
+                <h2>Books</h2>
+            </div>
+            <div id="books" class="collapse">
+                <div class="card-body">
+                    <div class="row">
+                        {% for book in books %}
+                            <div class="col-md-4">
+                                <div class="card mb-3">
+                                    {% if book.thumbnail %}
+                                        <img src="{{ book.thumbnail }}" class="card-img-top" alt="{{ book.title }} cover">
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <h5 class="card-title"><a href="{{ book.infoLink }}" target="_blank">{{ book.title }}</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-header" data-toggle="collapse" data-target="#research-papers">
+                <h2>Research Papers</h2>
+            </div>
+            <div id="research-papers" class="collapse">
+                <div class="card-body">
+                    <ul>
+                        {% for paper in papers %}
+                            <li><a href="{{ paper.url }}" target="_blank">{{ paper.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-header" data-toggle="collapse" data-target="#suggestions">
+                <h2>Suggestions</h2>
+            </div>
+            <div id="suggestions" class="collapse">
+                <div class="card-body">
+                    <ul>
+                        {% for suggestion in suggestions %}
+                            <li>{{ suggestion }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

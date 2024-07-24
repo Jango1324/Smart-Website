@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Quicksand:wght@300&display=swap" rel="stylesheet">
+    <style>
+        /* Full-height container */
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Quicksand', sans-serif;
+            overflow: hidden;
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://gadgetgang.com/wp-content/uploads/2020/10/minecraft-enchantment-table-gif.gif') no-repeat center center;
+            background-size: cover;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            color: #fff;
+        }
+
+        .minecraft-title {
+            background: linear-gradient(90deg, #8B4513, #A0522D, #8B4513);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: #fff; /* Change the text color to white */
+            font-size: 3rem;
+            font-weight: bold;
+            font-family: 'Press Start 2P', cursive;
+            animation: titleAnimation 5s ease infinite;
+        }
+
+        @keyframes titleAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .subtitle {
+            margin-top: 1rem;
+            font-size: 1.25rem;
+            font-family: 'Press Start 2P', cursive;
+            color: #e0e0e0;
+        }
+
+        .form-group input {
+            background-color: #d2b48c;
+            border: 2px solid #8B4513;
+            color: #000;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .btn-primary {
+            margin-top: 1rem;
+            background-color: #8B4513;
+            border: 2px solid #000;
+            color: #fff;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .btn-primary:hover {
+            background-color: #A0522D;
+            border-color: #000;
+        }
+    </style>
+    <title>Minecraft Study Resource Aggregator</title>
+</head>
+<body>
+    <div class="background"></div>
+    <div class="container">
+        <h1 class="minecraft-title">The Deep KnowledgeKz</h1>
+        <div class="subtitle">Learn Everything,Everywhere All At Once</div>
+        <form action="/search" method="post">
+            <div class="form-group">
+                <input type="text" class="form-control" id="query" name="query" required placeholder="Enter your query.">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+</body>
+</html>
